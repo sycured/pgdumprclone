@@ -10,14 +10,17 @@ Optionally set up cron job schedule (default is `0 1 * * *` - runs every day at 
 
 ## Environment Variables:
 
-| Variable        | Required? | Default   | Description                                        |
-|-----------------|:----------|:----------|:---------------------------------------------------|
-| `PGUSER`        | Required  | postgres  | The user for accessing the database                |
-| `PGPASSWORD`    | Optional  | `None`    | The password for accessing the database            |
-| `PGDB`          | Optional  | postgres  | The name of the database                           |
-| `PGHOST`        | Optional  | db        | The hostname of the database                       |
-| `PGPORT`        | Optional  | `5432`    | The port for the database                          |
-| `CRON_SCHEDULE` | Required  | 0 1 * * * | The cron schedule at which to run the pg_dump      |
+| Variable        | Required? | Default   | Description                                            |
+|-----------------|:----------|:----------|:-------------------------------------------------------|
+| `PGUSER`        | Required  | postgres  | The user for accessing the database                    |
+| `PGPASSWORD`    | Optional  |           | The password for accessing the database                |
+| `PGDB`          | Optional  | postgres  | The name of the database                               |
+| `PGHOST`        | Optional  | db        | The hostname of the database                           |
+| `PGPORT`        | Optional  | `5432`    | The port for the database                              |
+| `CRON_SCHEDULE` | Required  | 0 1 * * * | The cron schedule at which to run the pg_dump          |
+| `REMOTE_NAME`   | Rquired   | minio     | Rclone remote name                                     |
+| `REMOTE_PATH`   | Required  | pg_dump   | Folder where to upload dumps                           |
+| `OLDER_THAN`    | Optional  |           | Delete all backups older than this duration (ex. 366d) |
 
 Docker Compose
 ==============

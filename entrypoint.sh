@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 COMMAND=${1:-dump-cron}
 CRON_SCHEDULE=${CRON_SCHEDULE:-0 1 * * *}
@@ -22,6 +22,10 @@ elif [[ "${COMMAND}" == 'dump-cron' ]]; then
     CRON_ENV="PGUSER='${PGUSER}'\nPGDB='${PGDB}'\nPGHOST='${PGHOST}'\nPGPORT='${PGPORT}'\nREMOTE_NAME='${REMOTE_NAME}'\nREMOTE_PATH='${REMOTE_PATH}'"
     if [[ -n "${PGPASSWORD}" ]]; then
         CRON_ENV="$CRON_ENV\nPGPASSWORD='${PGPASSWORD}'"
+    fi
+
+    if [[ -n "$OLDER_THAN" ]]; then
+        CRON_ENV="$CRON_ENV\nOLDER_THAN='$OLDER_THAN'"
     fi
 
     echo -e "$CRON_ENV\n$CRON_SCHEDULE /dump.sh > $LOGFIFO 2>&1" | crontab -
